@@ -5,33 +5,6 @@ public class EmployeeDetailsPrinter {
     public EmployeeDetailsPrinter(Employee employee){
         this.employee = employee;
     }
-    private int calculateLeaveLeft(){
-        return (this.employee.getTotalLeaveAllowed() - this.employee.getLeavesTaken());
-    }
-
-    private int calculateTotalLeavePreviously(){
-        int years = 3;
-        if (this.employee.getYearsInOrg() < 3) {
-            years = this.employee.getYearsInOrg();
-        }
-        int totalLeaveLeftPreviously = 0;
-        for (int i = 0; i < years; i++) {
-            totalLeaveLeftPreviously += this.employee.getLeavesLeftPreviously()[this.employee.getYearsInOrg()-i-1];
-        }
-        return totalLeaveLeftPreviously;
-    }
-
-    private String getManager(){
-        if(this.employee.getManager() != null){
-            return this.employee.getManager();
-        }
-        return "None";
-    }
-
-    private double calculateAnnualSalary(){
-        return Math.round(this.employee.getMonthlySalary() * 12);
-    }
-
 
     public String toHtml() {
         String str = "<div>" +
@@ -44,11 +17,11 @@ public class EmployeeDetailsPrinter {
                 "<span>Manager:</span>" +
                 "<span>Reimbursable Leave:</span>" +
                 "</div>";
-        str += "<div class='right'><span>" + calculateLeaveLeft() + "</span>";
-        str += "<span>" + calculateAnnualSalary() + "</span>";
-        str += "<span>" + getManager() + "</span>";
+        str += "<div class='right'><span>" + this.employee.calculateLeaveLeft() + "</span>";
+        str += "<span>" + this.employee.calculateAnnualSalary() + "</span>";
+        str += "<span>" + this.employee.getManager() + "</span>";
 
-        str += "<span>" + calculateTotalLeavePreviously() + "</span>";
+        str += "<span>" + this.employee.calculateTotalLeavePreviously() + "</span>";
         return str + "</div> </div>";
     }
 }
