@@ -10,11 +10,13 @@ package net.media.training.live.ocp;
 public class ResourceAllocator {
     final static private int INVALID_RESOURCE_ID = -1;
 
-    public int allocate(Resource resource) {
+    public int allocate(ResourceFactory factory) {
+        Resource resource = factory.createResource();
         return resource.allocate();
     }
 
-    public void free(Resource resource, int resourceId) {
+    public void free(ResourceFactory factory, int resourceId) {
+        Resource resource = factory.createResource();
         resource.free(resourceId);
     }
 }
