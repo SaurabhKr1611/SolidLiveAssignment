@@ -7,7 +7,7 @@ package net.media.training.live.lsp;
  * Time: 12:56:02 PM
  * To change this template use File | Settings | File Templates.
  */
-public class PersistentSet<T> extends Set<T> {
+public class PersistentSet<T> extends CustomSet<T> {
     public void add(T element) {
         PersistentObject persistentObject = new PersistentObject(element);
         super.add((T) persistentObject);
