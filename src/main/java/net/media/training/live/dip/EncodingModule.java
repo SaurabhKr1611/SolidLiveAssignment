@@ -14,10 +14,11 @@ import java.util.Base64;
  * To change this template use File | Settings | File Templates.
  */
 public class EncodingModule {
-    public void encodeWithFiles() {
+    public void encodeWithFiles(String inputFile, String outputFile) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("/Users/goyalamit/Sandbox/training/src/solid_2011/live/dip/beforeEncryption.txt"));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("/Users/goyalamit/Sandbox/training/src/solid_2011/live/dip/afterEncryption.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile));
+            BufferedReader reader = new BufferedReader(new FileReader(outputFile));
+
             String aLine;
             while ((aLine = reader.readLine()) != null) {
                 String encodedLine = Base64.getEncoder().encodeToString(aLine.getBytes());
@@ -33,10 +34,10 @@ public class EncodingModule {
         }
     }
 
-    public void encodeBasedOnNetworkAndDatabase() {
+    public void encodeBasedOnNetworkAndDatabase(String urlString) {
         URL url = null;
         try {
-            url = new URL("http", "myfirstappwith.appspot.com", "index.html");
+            url = new URL(urlString);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -60,8 +61,8 @@ public class EncodingModule {
         }
         String inputString = inputString1.toString();
         String encodedString = Base64.getEncoder().encodeToString(inputString.getBytes());
-        MyDatabase database = new MyDatabase();
-        database.write(encodedString);
+        MyDatabaseWriter myDatabaseWriter = new MyDatabaseWriter();
+        myDatabaseWriter.writeData(encodedString);
     }
 }
 
